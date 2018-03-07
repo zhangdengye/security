@@ -16,12 +16,12 @@
 			<version>${imooc.security.version}</version>
 		</dependency>
 		
-		<!-- 
-		<dependency>
+		<!--<dependency>
 			<groupId>com.imooc.security</groupId>
 			<artifactId>imooc-security-authorize</artifactId>
 			<version>${imooc.security.version}</version>
-		</dependency>
+		</dependency>-->
+		<!--
 		<dependency>
 			<groupId>com.imooc.security</groupId>
 			<artifactId>imooc-security-app</artifactId>
@@ -50,10 +50,13 @@
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>2.7.0</version>
 		</dependency>
+		<!--WireMock可以单独运行,作用是模拟后台系统，客户端访问的是模拟器上的接口和数据，详见本教程视频，
+		可以在官网下到一个独立的可运行jar包，直接java -jar wiremock-standalone-2.6.0.jar运行即可-->
 		<dependency>
 			<groupId>com.github.tomakehurst</groupId>
 			<artifactId>wiremock</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt</artifactId>
@@ -63,6 +66,8 @@
 
 	<build>
 		<plugins>
+			<!--maven 构建插件，重写了maven的 package ，不加这里的插件，war工程，build为war或jar时，它依赖的第三方jar包和模块
+			不会被打包到 jar里面 -->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>

@@ -11,20 +11,28 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+
+		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-oauth2</artifactId>
 		</dependency>
+		<!--把session存储到redis用到-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-redis</artifactId>
 		</dependency>
+		<!--这个依赖主要可以在代码中轻松的使用@ConfigurationProperties注解注入属性文件配置的属性值-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+		</dependency>
+		<!--social社交登录用到，要基于jpa 插入登录数据到数据库-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jdbc</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.social</groupId>
@@ -54,9 +62,6 @@
 			<groupId>commons-beanutils</groupId>
 			<artifactId>commons-beanutils</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-configuration-processor</artifactId>
-		</dependency>
+
 	</dependencies>
 </project>

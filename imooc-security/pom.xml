@@ -12,6 +12,7 @@
 
 	<dependencyManagement>
 		<dependencies>
+			<!--统一管理springboot 极其用到的第三方包的版本（如commons-io 等），避免版本冲突。 SR4 对应 springboot 1.5.6-->
 			<dependency>
 				<groupId>io.spring.platform</groupId>
 				<artifactId>platform-bom</artifactId>
@@ -19,6 +20,7 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
+			<!--统一管理 spring-cloud-commons等 springcloud本身核心包版本 Dalston.SR2 基于 springboot 1.5.6版本-->
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
 				<artifactId>spring-cloud-dependencies</artifactId>
@@ -45,10 +47,15 @@
 	</build>
 	
 	<modules>
-		<module>../imooc-security-app</module>
-		<module>../imooc-security-browser</module>
+		<!--公共核心-->
 		<module>../imooc-security-core</module>
-		<module>../imooc-security-demo</module>
+		<!--app、微信等专用子工程，和浏览器的子工程的主要差异是采用token代替session来标识访问用户-->
+		<module>../imooc-security-app</module>
+		<!--浏览器专用子工程-->
+		<module>../imooc-security-browser</module>
+		<!--资源访问权限专用子工程，录入定义某 resturl 的 访问权限（需登录，且需某角色访问）-->
 		<module>../imooc-security-authorize</module>
+		<!--基于以上工程的可运行的例子-->
+		<module>../imooc-security-demo</module>
 	</modules>
 </project>
