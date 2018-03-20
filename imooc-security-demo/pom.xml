@@ -2,6 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>imooc-security-demo</artifactId>
+	<packaging>war</packaging>
 	<parent>
 		<groupId>com.imooc.security</groupId>
 		<artifactId>imooc-security</artifactId>
@@ -16,11 +17,11 @@
 			<version>${imooc.security.version}</version>
 		</dependency>
 		
-		<!--<dependency>
+		<dependency>
 			<groupId>com.imooc.security</groupId>
 			<artifactId>imooc-security-authorize</artifactId>
 			<version>${imooc.security.version}</version>
-		</dependency>-->
+		</dependency>
 		<!--
 		<dependency>
 			<groupId>com.imooc.security</groupId>

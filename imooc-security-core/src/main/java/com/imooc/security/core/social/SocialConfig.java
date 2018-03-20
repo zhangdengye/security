@@ -72,10 +72,10 @@ public class SocialConfig extends SocialConfigurerAdapter {
 	}
 
 	/**
-	 * 用来处理注册流程的工具类
-	 * 
-	 * @param connectionFactoryLocator
-	 * @return
+	 * ProviderSignInUtils spring social提供的工具类
+	 * 解决两个问题:
+	 * 1.在用户注册的过程用如何拿到spring social的信息
+	 * 2.第二个是如何在用户注册完成后把系统生成的用户ID返回给spring social
 	 */
 	@Bean
 	public ProviderSignInUtils providerSignInUtils(ConnectionFactoryLocator connectionFactoryLocator) {

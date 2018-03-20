@@ -14,9 +14,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * @author zhailiang
  *
  */
-@SpringBootApplication
+/*@SpringBootApplication
 @RestController
-@EnableSwagger2
+@EnableSwagger2*/
 public class DemoApplication {
 
 	/**
@@ -26,9 +26,9 @@ public class DemoApplication {
 		SpringApplication.run(DemoApplication.class, args);
 	}
 	
-	@GetMapping("/hello")
+	/*@GetMapping("/hello")
 	public String hello() {
 		return "hello spring security";
-	}
+	}*/
 
 }
