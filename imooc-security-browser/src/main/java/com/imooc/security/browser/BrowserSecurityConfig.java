@@ -3,12 +3,14 @@
  */
 package com.imooc.security.browser;
 
-import javax.sql.DataSource;
-
+import com.imooc.security.core.authentication.FormAuthenticationConfig;
+import com.imooc.security.core.authentication.mobile.SmsCodeAuthenticationSecurityConfig;
+import com.imooc.security.core.authorize.AuthorizeConfigManager;
+import com.imooc.security.core.properties.SecurityProperties;
+import com.imooc.security.core.validate.code.ValidateCodeSecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -19,11 +21,7 @@ import org.springframework.security.web.session.InvalidSessionStrategy;
 import org.springframework.security.web.session.SessionInformationExpiredStrategy;
 import org.springframework.social.security.SpringSocialConfigurer;
 
-import com.imooc.security.core.authentication.FormAuthenticationConfig;
-import com.imooc.security.core.authentication.mobile.SmsCodeAuthenticationSecurityConfig;
-import com.imooc.security.core.authorize.AuthorizeConfigManager;
-import com.imooc.security.core.properties.SecurityProperties;
-import com.imooc.security.core.validate.code.ValidateCodeSecurityConfig;
+import javax.sql.DataSource;
 
 /**
  * 浏览器环境下安全配置主类
@@ -97,7 +95,8 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
 				.deleteCookies("JSESSIONID")
 				.and()
 			.csrf().disable();
-		
+
+		// 调用认证配置管理器，设置url的 访问策略 （哪些url无需登录等） 有多个实现了AuthorizeConfigManager接口的实例，都会被调用
 		authorizeConfigManager.config(http.authorizeRequests());
 		
 	}
@@ -110,6 +109,7 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
 	public PersistentTokenRepository persistentTokenRepository() {
 		JdbcTokenRepositoryImpl tokenRepository = new JdbcTokenRepositoryImpl();
 		tokenRepository.setDataSource(dataSource);
+		//启动时创建表 ，第一次时可以打开，再次运行需关闭此语句，否则报错重复建表
 //		tokenRepository.setCreateTableOnStartup(true);
 		return tokenRepository;
 	}

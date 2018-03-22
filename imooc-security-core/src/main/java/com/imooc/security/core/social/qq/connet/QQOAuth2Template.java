@@ -51,6 +51,7 @@ public class QQOAuth2Template extends OAuth2Template {
 	@Override
 	protected RestTemplate createRestTemplate() {
 		RestTemplate restTemplate = super.createRestTemplate();
+		//解决中文乱码
 		restTemplate.getMessageConverters().add(new StringHttpMessageConverter(Charset.forName("UTF-8")));
 		return restTemplate;
 	}

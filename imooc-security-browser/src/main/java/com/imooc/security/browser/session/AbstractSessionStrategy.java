@@ -49,10 +49,7 @@ public class AbstractSessionStrategy {
 
 	private ObjectMapper objectMapper = new ObjectMapper();
 
-	/**
-	 * @param invalidSessionUrl
-	 * @param invalidSessionHtmlUrl
-	 */
+
 	public AbstractSessionStrategy(SecurityProperties securityPropertie) {
 		String invalidSessionUrl = securityPropertie.getBrowser().getSession().getSessionInvalidUrl();
 		Assert.isTrue(UrlUtils.isValidRedirectUrl(invalidSessionUrl), "url must start with '/' or with 'http(s)'");

@@ -12,7 +12,7 @@ import com.imooc.security.core.social.qq.api.QQUserInfo;
 
 /**
  * @author zhailiang
- *
+ * 用户信息适配器，将 QQUserInfo 和 标准的 Connection 中存储的 用户信息 视频对应
  */
 public class QQAdapter implements ApiAdapter<QQ> {
 
@@ -27,6 +27,7 @@ public class QQAdapter implements ApiAdapter<QQ> {
 		
 		values.setDisplayName(userInfo.getNickname());
 		values.setImageUrl(userInfo.getFigureurl_qq_1());
+		//用户个人主页 ，如 微博主页，qq没有这个东西，所以置空
 		values.setProfileUrl(null);
 		values.setProviderUserId(userInfo.getOpenId());
 	}

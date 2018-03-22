@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
@@ -66,7 +67,7 @@ public class UserController {
 	}
 	
 	@GetMapping("/me")
-	public Object getCurrentUser(Authentication user, HttpServletRequest request) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, SignatureException, IllegalArgumentException, UnsupportedEncodingException {
+	public Object getCurrentUser(Authentication user, HttpServletRequest request,HttpSession session) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, SignatureException, IllegalArgumentException, UnsupportedEncodingException {
 		
 //		String token = StringUtils.substringAfter(request.getHeader("Authorization"), "bearer ");
 //		
@@ -76,7 +77,7 @@ public class UserController {
 //		String company = (String) claims.get("company");
 //		
 //		System.out.println(company);
-		
+
 		return user;
 	}
 

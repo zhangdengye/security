@@ -22,7 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author zhailiang
  *
  */
-//@Component //注释这个，可以用 RbacUserDetailsService
+@Component //注释这个，可以用 RbacUserDetailsService
 @Transactional
 public class DemoUserDetailsService implements UserDetailsService, SocialUserDetailsService {
 

@@ -15,7 +15,8 @@ import com.imooc.security.core.social.qq.api.QQImpl;
 public class QQServiceProvider extends AbstractOAuth2ServiceProvider<QQ> {
 
 	private String appId;
-	
+
+	//定义导向到QQ的认证url
 	private static final String URL_AUTHORIZE = "https://graph.qq.com/oauth2.0/authorize";
 	
 	private static final String URL_ACCESS_TOKEN = "https://graph.qq.com/oauth2.0/token";
