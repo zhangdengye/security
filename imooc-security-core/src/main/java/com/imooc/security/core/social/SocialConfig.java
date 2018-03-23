@@ -37,7 +37,9 @@ public class SocialConfig extends SocialConfigurerAdapter {
 
 	@Autowired
 	private SecurityProperties securityProperties;
-	
+
+	// 客户端程序静默 注册绑定接口 ，如果注入，将会告知social，客户端程序已经 后台静默处理了用户的绑定，无需在跳转到 注册绑定页 /singUp ，而直接到系统首页如 index
+	// 如 参见 DemoConnectionSignUp 的实现
 	@Autowired(required = false)
 	private ConnectionSignUp connectionSignUp;
 	
