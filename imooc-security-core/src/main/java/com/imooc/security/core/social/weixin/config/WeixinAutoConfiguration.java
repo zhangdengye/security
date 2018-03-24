@@ -43,7 +43,8 @@ public class WeixinAutoConfiguration extends SocialAutoConfigurerAdapter {
 		return new WeixinConnectionFactory(weixinConfig.getProviderId(), weixinConfig.getAppId(),
 				weixinConfig.getAppSecret());
 	}
-	
+
+	// 微信绑定和解绑的结果，social 写死了必须connect 开头，如 connect/weixinConnected  绑定和解绑用的是同一个视图
 	@Bean({"connect/weixinConnect", "connect/weixinConnected"})
 	@ConditionalOnMissingBean(name = "weixinConnectedView")
 	public View weixinConnectedView() {

@@ -19,10 +19,11 @@ import org.springframework.web.servlet.view.AbstractView;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- * 社交账号绑定状态视图
+ * 社交账号绑定状态视图 ，告诉客户端 ，社交账号的绑定状态，如 微信已绑定，QQ未绑定等 ，其实读的 userConnetion表
  * @author zhailiang
  *
  */
+// social 写死了 此视图的名字，即 connect/status ，需业务系统自己实现
 @Component("connect/status")
 public class ImoocConnectionStatusView extends AbstractView {
 	

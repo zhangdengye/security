@@ -11,7 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.view.AbstractView;
 
 /**
- * 绑定结果视图
+ * 绑定结果视图 ，例如 扫描微信 二维码后，返回绑定的结果 ，成功或失败
+ * 绑定和解绑用的是同一个视图
  * @author zhailiang
  *
  */
