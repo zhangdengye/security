@@ -58,10 +58,11 @@ public class DemoUserDetailsService implements UserDetailsService, SocialUserDet
 		//根据查找到的用户信息判断用户是否被冻结
 		String password = passwordEncoder.encode("123456");
 		logger.info("数据库密码是:"+password);
-		
+
+		//oauth下，用户必须要有 ROLE_USER 权限
 		return new SocialUser(userId, password,
 				true, true, true, true,
-				AuthorityUtils.commaSeparatedStringToAuthorityList("xxx"));
+				AuthorityUtils.commaSeparatedStringToAuthorityList("xxx,ROLE_USER"));
 	}
 
 }

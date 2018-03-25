@@ -31,7 +31,7 @@ import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- * APP环境下认证成功处理器
+ * APP环境下认证成功处理器，认证成功后返回acesstoken
  * 
  * @author zhailiang
  *
@@ -51,12 +51,7 @@ public class ImoocAuthenticationSuccessHandler extends SavedRequestAwareAuthenti
 	private AuthorizationServerTokenServices authorizationServerTokenServices;
 
 	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.springframework.security.web.authentication.
-	 * AuthenticationSuccessHandler#onAuthenticationSuccess(javax.servlet.http.
-	 * HttpServletRequest, javax.servlet.http.HttpServletResponse,
-	 * org.springframework.security.core.Authentication)
+	 这里是改造了传统的 用户名密码、短信登录成功后的处理，认证成功后生成 accessToken 供后续业务调用
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
