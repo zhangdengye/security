@@ -16,7 +16,7 @@
 			<artifactId>imooc-security-browser</artifactId>
 			<version>${imooc.security.version}</version>
 		</dependency>-->
-		
+
 	<!--	<dependency>
 			<groupId>com.imooc.security</groupId>
 			<artifactId>imooc-security-authorize</artifactId>

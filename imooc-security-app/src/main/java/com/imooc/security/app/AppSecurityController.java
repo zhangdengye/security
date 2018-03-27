@@ -38,7 +38,7 @@ public class AppSecurityController extends SocialController {
 	 * @return
 	 */
 	@GetMapping(SecurityConstants.DEFAULT_SOCIAL_USER_INFO_URL)
-	@ResponseStatus(HttpStatus.UNAUTHORIZED)
+	//@ResponseStatus(HttpStatus.UNAUTHORIZED)
 	public SocialUserInfo getSocialUserInfo(HttpServletRequest request) {
 		Connection<?> connection = providerSignInUtils.getConnectionFromSession(new ServletWebRequest(request));
 		appSingUpUtils.saveConnectionData(new ServletWebRequest(request), connection.createData());

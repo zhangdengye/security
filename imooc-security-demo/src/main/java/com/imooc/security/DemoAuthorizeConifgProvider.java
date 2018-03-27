@@ -3,6 +3,7 @@
  */
 package com.imooc.security;
 
+import com.imooc.security.core.properties.SecurityConstants;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
@@ -24,7 +25,7 @@ public class DemoAuthorizeConifgProvider implements AuthorizeConfigProvider {
 	public boolean config(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry config) {
 		//demo项目授权配置
 		config.antMatchers(
-				"/auth/qq","/auth/weixin").permitAll();
+				"/auth/qq","/auth/weixin", SecurityConstants.DEFAULT_SOCIAL_USER_INFO_URL).permitAll();
 		return false;
 	}
 

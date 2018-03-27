@@ -11,8 +11,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+
+import com.imooc.security.core.properties.SecurityProperties;
+import io.jsonwebtoken.*;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -33,10 +39,6 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.imooc.dto.User;
 import com.imooc.dto.UserQueryCondition;
 
-import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.MalformedJwtException;
-import io.jsonwebtoken.SignatureException;
-import io.jsonwebtoken.UnsupportedJwtException;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
@@ -47,37 +49,44 @@ import io.swagger.annotations.ApiParam;
 @RestController
 @RequestMapping("/user")
 public class UserController {
-	
+	private Logger logger = LoggerFactory.getLogger(getClass());
 	@Autowired
 	private ProviderSignInUtils providerSignInUtils;
+
+	@Autowired
+	private SecurityProperties securityProperties ;
 	
-//	@Autowired
-//	private AppSingUpUtils appSingUpUtils;
-	
-//	@Autowired
-//	private SecurityProperties securityProperties;
-	
+
+	// 依赖 browser 包时，处理用户提交注册 ，用 providerSignInUtils 从session中获取用户信息
 	@PostMapping("/regist")
 	public void regist(User user, HttpServletRequest request) {
-		
 		//不管是注册用户还是绑定用户，都会拿到一个用户唯一标识。
 		String userId = user.getUsername();
 		providerSignInUtils.doPostSignUp(userId, new ServletWebRequest(request));
-//		appSingUpUtils.doPostSignUp(new ServletWebRequest(request), userId);
+
 	}
+
+	/*
+	//  依赖 app 包时，处理用户提交注册 ，用 appSingUpUtils 从redis中获取用户信息 ，因为此时客户端无法传递cookie，所以服务端从session中获取不到信息
+	@Autowired
+	private SecurityProperties securityProperties;
+	@PostMapping("/appRegist")
+	public void appregist(User user, HttpServletRequest request) {
+		//不管是注册用户还是绑定用户，都会拿到一个用户唯一标识。
+		String userId = user.getUsername();
+		appSingUpUtils.doPostSignUp(new ServletWebRequest(request), userId);
+	}
+	*/
 	
 	@GetMapping("/me")
 	public Object getCurrentUser(Authentication user, HttpServletRequest request,HttpSession session) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, SignatureException, IllegalArgumentException, UnsupportedEncodingException {
-		
-//		String token = StringUtils.substringAfter(request.getHeader("Authorization"), "bearer ");
-//		
-//		Claims claims = Jwts.parser().setSigningKey(securityProperties.getOauth2().getJwtSigningKey().getBytes("UTF-8"))
-//					.parseClaimsJws(token).getBody();
-//		
-//		String company = (String) claims.get("company");
-//		
-//		System.out.println(company);
+		//标准的 Authentication 只包括标准的token信息，不包括增强器中自定义的信息，通过下面代码获取自定义信息
+		String token = StringUtils.substringAfter(request.getHeader("Authorization"), "bearer ");
+		Claims claims = Jwts.parser().setSigningKey(securityProperties.getOauth2().getJwtSigningKey().getBytes("UTF-8"))
+					.parseClaimsJws(token).getBody();
 
+		String company = (String) claims.get("company");
+		logger.info("jwtToken 的增强信息：company = "+company);
 		return user;
 	}
 
