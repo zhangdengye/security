@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>登录</title>
+</head>
+<body>
+	<h2>Demo注册页</h2>
+	
+	<form action="/user/regist" method="post">
+		<table>
+			<tr>
+				<td>用户名:</td> 
+				<td><input type="text" name="username"></td>
+			</tr>
+			<tr>
+				<td>密码:</td>
+				<td><input type="password" name="password"></td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<button type="submit" name="type" value="regist">注册</button>
+					<button type="submit" name="type" value="binding">绑定</button>
+				</td>
+			</tr>
+		</table>
+	</form>
+	<div> 注册后，imooc_userconnection 表生成对应微信或qq的  本地帐户记录，userId 不为空<br>
+		仅绑定，imooc_userconnection 表生成对应微信或qq的帐号信息，userId为空。<br>
+		通常网站的做法是自动生成一个随机帐号 和 微信帐号进行绑定
+	</div>
+</body>
+</html>

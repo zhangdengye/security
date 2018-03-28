@@ -33,7 +33,7 @@ public class TestApplication {
 	
 	@PostMapping("/user/regist")
 	public void regist(HttpServletRequest request){
-		providerSignInUtils.doPostSignUp("jojo", new ServletWebRequest(request));
+		providerSignInUtils.doPostSignUp(request.getParameter("username"), new ServletWebRequest(request));
 	}
 	
 	public static void main(String[] args) {

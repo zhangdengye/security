@@ -19,7 +19,7 @@ import com.imooc.security.rbac.repository.AdminRepository;
  * @author zhailiang
  *
  */
-// @Component
+@Component
 @Transactional
 public class RbacUserDetailsService implements UserDetailsService {
 
