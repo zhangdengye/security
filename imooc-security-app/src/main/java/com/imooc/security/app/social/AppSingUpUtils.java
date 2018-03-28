@@ -18,7 +18,8 @@ import org.springframework.web.context.request.WebRequest;
 import com.imooc.security.app.AppSecretException;
 
 /**
- * app环境下替换providerSignInUtils，避免由于没有session导致读不到社交用户信息的问题
+ * app环境下替换providerSignInUtils（基于session），避免由于没有session导致读不到社交用户信息的问题
+ * （app环境下请求头中无 cookie，所以无法从session中获取）， 写入session是没问题的，就是无法读取
  * 
  * @author zhailiang
  *

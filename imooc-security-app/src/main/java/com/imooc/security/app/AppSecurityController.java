@@ -33,12 +33,12 @@ public class AppSecurityController extends SocialController {
 	private AppSingUpUtils appSingUpUtils;
 	
 	/**
-	 * 需要注册时跳到这里，返回401和用户信息给前端
+	 * 需要注册时跳到这里，返回401和用户信息给app前端
 	 * @param request
 	 * @return
 	 */
 	@GetMapping(SecurityConstants.DEFAULT_SOCIAL_USER_INFO_URL)
-	//@ResponseStatus(HttpStatus.UNAUTHORIZED)
+	@ResponseStatus(HttpStatus.UNAUTHORIZED)
 	public SocialUserInfo getSocialUserInfo(HttpServletRequest request) {
 		Connection<?> connection = providerSignInUtils.getConnectionFromSession(new ServletWebRequest(request));
 		appSingUpUtils.saveConnectionData(new ServletWebRequest(request), connection.createData());

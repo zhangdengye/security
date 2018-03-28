@@ -47,6 +47,7 @@ public class ImoocAuthorizationServerConfig extends AuthorizationServerConfigure
 	@Autowired(required = false)
 	private JwtAccessTokenConverter jwtAccessTokenConverter;
 
+	//Token 增强器
 	@Autowired(required = false)
 	private TokenEnhancer jwtTokenEnhancer;
 
@@ -62,6 +63,7 @@ public class ImoocAuthorizationServerConfig extends AuthorizationServerConfigure
 				.authenticationManager(authenticationManager)
 				.userDetailsService(userDetailsService);
 
+		//如果是jwtToken 并且配置了jwtToken 增强器（存储扩展信息），加入增强器链，并用自己的token生成和转换器
 		if (jwtAccessTokenConverter != null && jwtTokenEnhancer != null) {
 			TokenEnhancerChain enhancerChain = new TokenEnhancerChain();
 			List<TokenEnhancer> enhancers = new ArrayList<>();
@@ -74,7 +76,7 @@ public class ImoocAuthorizationServerConfig extends AuthorizationServerConfigure
 	}
 
 	/**
-	 * tokenKey的访问权限表达式配置
+	 * tokenKey（jwtToken的签名）的访问权限表达式配置，不配置，客户端无法获取签名
 	 */
 	public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
 		security.tokenKeyAccess("permitAll()");
@@ -90,10 +92,11 @@ public class ImoocAuthorizationServerConfig extends AuthorizationServerConfigure
 			for (OAuth2ClientProperties client : securityProperties.getOauth2().getClients()) {
 				builder.withClient(client.getClientId())
 						.secret(client.getClientSecret())
+						//可支持的认证模式
 						.authorizedGrantTypes("refresh_token", "authorization_code", "password")
 						.accessTokenValiditySeconds(client.getAccessTokenValidateSeconds())
 						.refreshTokenValiditySeconds(2592000)
-						.scopes("all");
+						.scopes("all"); //可授权限，如 访问昵称、头像、qq空间等
 			}
 		}
 	}

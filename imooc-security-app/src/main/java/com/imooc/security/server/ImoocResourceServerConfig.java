@@ -54,7 +54,8 @@ public class ImoocResourceServerConfig extends ResourceServerConfigurerAdapter {
 	
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
-		
+
+		//认证配置
 		formAuthenticationConfig.configure(http);
 		
 		http.apply(validateCodeSecurityConfig)
@@ -66,7 +67,8 @@ public class ImoocResourceServerConfig extends ResourceServerConfigurerAdapter {
 			.apply(openIdAuthenticationSecurityConfig)
 				.and()
 			.csrf().disable();
-		
+
+		//资源url 访问权限配置
 		authorizeConfigManager.config(http.authorizeRequests());
 	}
 	

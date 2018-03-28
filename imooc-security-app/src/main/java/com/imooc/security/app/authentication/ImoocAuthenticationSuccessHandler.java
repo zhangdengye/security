@@ -66,14 +66,12 @@ public class ImoocAuthenticationSuccessHandler extends SavedRequestAwareAuthenti
 			throw new UnapprovedClientAuthenticationException("请求头中无client信息");
 		}
 
+		// 请求参数中的的客户端（clientId 和 密码） 是否和 系统配置的 一致，安全性考虑
 		String[] tokens = extractAndDecodeHeader(header, request);
 		assert tokens.length == 2;
-
 		String clientId = tokens[0];
 		String clientSecret = tokens[1];
-
 		ClientDetails clientDetails = clientDetailsService.loadClientByClientId(clientId);
-
 		if (clientDetails == null) {
 			throw new UnapprovedClientAuthenticationException("clientId对应的配置信息不存在:" + clientId);
 		} else if (!StringUtils.equals(clientDetails.getClientSecret(), clientSecret)) {
@@ -83,7 +81,8 @@ public class ImoocAuthenticationSuccessHandler extends SavedRequestAwareAuthenti
 		TokenRequest tokenRequest = new TokenRequest(MapUtils.EMPTY_MAP, clientId, clientDetails.getScope(), "custom");
 		
 		OAuth2Request oAuth2Request = tokenRequest.createOAuth2Request(clientDetails);
-		
+
+		// 把OAuth2Request 请求信息（客户端） 和 认证后的用户信息 封装到 OAuth2Authentication ，并通过json的 token形式返回
 		OAuth2Authentication oAuth2Authentication = new OAuth2Authentication(oAuth2Request, authentication);
 		
 		OAuth2AccessToken token = authorizationServerTokenServices.createAccessToken(oAuth2Authentication);
