@@ -58,8 +58,9 @@ public class ImoocResourceServerConfig extends ResourceServerConfigurerAdapter {
 		//认证配置
 		formAuthenticationConfig.configure(http);
 		
-		http.apply(validateCodeSecurityConfig)
-				.and()
+		http/* app 下不启用图形验证码的配置
+		.apply(validateCodeSecurityConfig)
+				.and()*/
 			.apply(smsCodeAuthenticationSecurityConfig)
 				.and()
 			.apply(imoocSocialSecurityConfig)
