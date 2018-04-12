@@ -25,7 +25,7 @@ public class DemoAuthorizeConifgProvider implements AuthorizeConfigProvider {
 	public boolean config(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry config) {
 		//demo项目授权配置
 		config.antMatchers(
-				"/user/regist",
+				"/user/regist","/user/appRegist",
 				SecurityConstants.DEFAULT_SOCIAL_USER_INFO_URL).permitAll();
 		return false;
 	}

@@ -12,5 +12,6 @@
      5、经测试 ，短信登录，微信登录等都可以用
      6、imooc-security-authorize 工程是 基于JPA 和 RBAC （角色、菜单【资源】、url，用户）的一套 示例 权限控制代码
         其中的 \web\controller\AdminController.java 中的 query 方法 ，灵活的用到了 JPA 中的自定义查询条件，可以考虑其它项目上封装用
+     7,注意测试 app下 社交登录（如微信时） 后，跳转到用户注册页时，要 去注释UserController 中的 @PostMapping("/appRegist")注册方法
      */
 %>

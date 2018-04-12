@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 
+import com.imooc.security.app.social.AppSingUpUtils;
 import com.imooc.security.core.properties.SecurityProperties;
 import io.jsonwebtoken.*;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
@@ -66,18 +67,17 @@ public class UserController {
 
 	}
 
-	/*
 	//  依赖 app 包时，处理用户提交注册 ，用 appSingUpUtils 从redis中获取用户信息 ，因为此时客户端无法传递cookie，所以服务端从session中获取不到信息
+
 	@Autowired
-	private SecurityProperties securityProperties;
+	private AppSingUpUtils appSingUpUtils ;
 	@PostMapping("/appRegist")
 	public void appregist(User user, HttpServletRequest request) {
 		//不管是注册用户还是绑定用户，都会拿到一个用户唯一标识。
 		String userId = user.getUsername();
 		appSingUpUtils.doPostSignUp(new ServletWebRequest(request), userId);
 	}
-	*/
-	
+
 	@GetMapping("/me")
 	public Object getCurrentUser(Authentication user, HttpServletRequest request,HttpSession session) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, SignatureException, IllegalArgumentException, UnsupportedEncodingException {
 		//标准的 Authentication 只包括标准的token信息，不包括增强器中自定义的信息，通过下面代码获取自定义信息
